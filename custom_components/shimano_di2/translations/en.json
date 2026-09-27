@@ -1,0 +1,29 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "Add Shimano Di2",
+        "description": "Choose the Shimano Di2 unit to add. Make sure the unit is awake (press a shift button) and within Bluetooth range.",
+        "data": {
+          "address": "Bluetooth device"
+        }
+      },
+      "bluetooth_confirm": {
+        "title": "Add Shimano Di2",
+        "description": "Do you want to add the Shimano Di2 unit \"{name}\"?"
+      }
+    },
+    "abort": {
+      "no_devices_found": "No Shimano Di2 units were found. Make sure the unit is awake (press a shift button) and within Bluetooth range, then try again.",
+      "already_configured": "This Shimano Di2 unit is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "battery_level": {
+        "name": "Battery"
+      }
+    }
+  }
+}
