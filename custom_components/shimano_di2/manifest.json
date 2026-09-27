@@ -3,17 +3,33 @@
   "name": "Shimano Di2",
   "bluetooth": [
     {
+      "local_name": "RDR*",
+      "connectable": true
+    },
+    {
       "manufacturer_id": 1098,
+      "connectable": true
+    },
+    {
+      "service_uuid": "000018ef-5348-494d-414e-4f5f424c4500",
+      "connectable": true
+    },
+    {
+      "service_uuid": "000018ff-5348-494d-414e-4f5f424c4500",
       "connectable": true
     }
   ],
   "codeowners": [],
   "config_flow": true,
-  "dependencies": ["bluetooth_adapters"],
+  "dependencies": [
+    "bluetooth_adapters"
+  ],
   "documentation": "https://github.com/diegogalindez/Galo",
   "integration_type": "device",
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/diegogalindez/Galo/issues",
-  "requirements": ["bleak-retry-connector>=3.5.0"],
-  "version": "0.1.0"
+  "requirements": [
+    "bleak-retry-connector>=3.5.0"
+  ],
+  "version": "0.1.1"
 }
