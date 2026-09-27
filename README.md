@@ -13,9 +13,16 @@ Verified against:
 
 - **Dura-Ace Di2 12-speed** rear derailleur **RD-R9250** (advertises as `RDR9250 ...`)
 
-Should also work with other modern Di2 units that advertise the Shimano
-manufacturer ID (`0x044A` / `1098`) and expose the standard BLE **Battery
-Service** (`0x180F`), including:
+Should also work with other modern Di2 units that expose the standard BLE
+**Battery Service** (`0x180F`) and advertise any of the following (used for
+auto-discovery):
+
+- a local name starting with `RDR` (e.g. `RDR9250 ...`)
+- the Shimano manufacturer ID (`0x044A` / `1098`)
+- a service UUID on Shimano's `SHIMANO_BLE` base
+  (`000018ef-5348-494d-414e-4f5f424c4500` / `000018ff-...`)
+
+This includes:
 
 - **105 Di2** rear derailleur **RD-R7150**
 - Ultegra Di2 **RD-R8150**
@@ -53,7 +60,11 @@ Service** (`0x180F`), including:
 2. Home Assistant should auto-discover it — go to
    **Settings → Devices & Services** and confirm the discovered **Shimano Di2**
    device.
-3. If it isn't auto-discovered, click **Add Integration**, search for
+3. Discovery only happens while the unit is awake and advertising, and requires
+   a **connectable** adapter (local Bluetooth or an *active* ESPHome proxy —
+   passive proxies are ignored). After installing or updating the integration,
+   restart Home Assistant so the new Bluetooth matchers are loaded.
+4. If it isn't auto-discovered, click **Add Integration**, search for
    **Shimano Di2**, and pick your unit from the list.
 
 ## Entities

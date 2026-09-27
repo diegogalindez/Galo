@@ -13,12 +13,22 @@ from homeassistant.components.bluetooth import (
 from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
 from homeassistant.const import CONF_ADDRESS
 
-from .const import DOMAIN, SHIMANO_MANUFACTURER_ID
+from .const import (
+    DOMAIN,
+    SHIMANO_BASE_UUID_SUFFIX,
+    SHIMANO_DI2_NAME_PREFIX,
+    SHIMANO_MANUFACTURER_ID,
+)
 
 
 def _is_shimano_di2(info: BluetoothServiceInfoBleak) -> bool:
     """Return True if the advertisement looks like a Shimano Di2 unit."""
-    return SHIMANO_MANUFACTURER_ID in info.manufacturer_data
+    if SHIMANO_MANUFACTURER_ID in info.manufacturer_data:
+        return True
+    if (info.name or "").upper().startswith(SHIMANO_DI2_NAME_PREFIX):
+        return True
+    uuids = (*info.service_uuids, *info.service_data)
+    return any(uuid.lower().endswith(SHIMANO_BASE_UUID_SUFFIX) for uuid in uuids)
 
 
 class ShimanoDi2ConfigFlow(ConfigFlow, domain=DOMAIN):
